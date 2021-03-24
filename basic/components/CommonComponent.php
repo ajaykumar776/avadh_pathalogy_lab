@@ -117,7 +117,7 @@ class CommonComponent extends Component{
     function get_Alert(){
         
 
-		return("This bill is not present in database");
+		return("This patient has no bill ");
     }
 }
 ?>

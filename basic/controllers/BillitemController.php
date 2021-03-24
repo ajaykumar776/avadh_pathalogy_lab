@@ -1,8 +1,8 @@
 <?php
 
 namespace app\controllers;
-
-use Yii;
+use yii;
+use Yii\app\bill;
 use yii\bootstrap\Alert;
 use yii\db\Query ;
 use app\models\BillItem;
@@ -71,25 +71,18 @@ class BillitemController extends Controller
     //bill generate action 
     public function actionBill($id)
     {
-        
-        $bill = HospitalBill::find()->where(['patient_id' => $id ])->andWhere(['<>','remaining_amount',0])->one();
-        if(!$bill)
-        {
-            alert("no");
-            die;
+        if($bill = HospitalBill::find()->where(['patient_id' => $id ])->andWhere(['<>','remaining_amount',0])->one()){
+
+           $hospital_id= $bill->id;
             
+            $billitems = BillItem::find()->where(['hospital_bill_id' => $hospital_id ])->all();
+
+
+            return $this->render('bill', ['billitems'=>$billitems],$hospital_id);
+        }else
+        {
+            echo Yii::$app->Common->get_Alert();
         }
-        $hospital_id= $bill->id;
-        $billitems = BillItem::find()->where(['hospital_bill_id' => $hospital_id ])->all();
-        // $billitems[][]
-    
-
-        
-
-
-        return $this->render('bill', [
-            'model' => $this->findModel($id),
-        ]);
         
     }
 
