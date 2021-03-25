@@ -90,15 +90,14 @@
 				</div>
 			</div>
 			
-			<!-- <div class="col-md-2">
+			 <div class="col-md-2">
 				<div class="card bg-light" style="width:300px">
-					<div class="card-header"><p>Subcategory</p></div>
-					<div class="card-body"><p class="card-text">Total Subcategory : <?php echo Yii::$app->Common->get_subcategory();?></p>
-						<a href="http://localhost/ajay_office/yii/basic/web/index.php?r=scategory/index"class="btn btn-primary">click here to see</a>
+					<div class="card-header"><p>HospitalBill</p></div>
+						<a href="http://localhost/ajay_office/avadh_pathalogy_lab/basic/web/index.php?r=hospital%2Findex"class="btn btn-primary">click here to see</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-2">
+			<!-- <div class="col-md-2">
 				<div class="card bg-light" style="width:300px">
 					<div class="card-header"><p>Bill</p></div>
 					<div class="card-body"><p class="card-text">Total Bill : <?php echo Yii::$app->Common->get_bill();?></p>
@@ -113,7 +112,7 @@
 						<a href="http://localhost/ajay_office/yii/basic/web/index.php?r=scategory/index"class="btn btn-primary">click here to see</a>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div> --> -
 		<br><br>
 

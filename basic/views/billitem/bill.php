@@ -49,7 +49,7 @@ use yii\db\Connection;
                 <tbody>
                         <?php foreach($billitems as $billitem){?>
 
-                            <?php $subcategory =  Scategory::find()->where(['category_id'=> $billitem->category_id])->where(['amount'=> $billitem->unit_rate])->one();?>
+                            <?php $subcategory =  Scategory::find()->where(['id'=> $billitem->subcategory_id])->one();?>
             
                             <tr>
                                 <td><?php  echo $subcategory->name;?></td>
@@ -60,7 +60,6 @@ use yii\db\Connection;
                             </tr>
                         <?php }?>
 
-                    
                                 
                 </tbody>
                     
