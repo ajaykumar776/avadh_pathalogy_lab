@@ -81,7 +81,7 @@ class BillitemController extends Controller
             return $this->render('bill', ['billitems'=>$billitems],$hospital_id);
         }else
         {
-            echo Yii::$app->Common->get_Alert();'<p> click here  to Home Page<?p>';
+            echo Yii::$app->Common->get_Alert();
         }
         
     }

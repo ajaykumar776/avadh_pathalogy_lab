@@ -116,8 +116,9 @@ class CommonComponent extends Component{
     }
     function get_Alert(){
         
+        
 
-		return("This patient has no bill ");
+        return("This patient has no bill ");
     }
 }
 ?>

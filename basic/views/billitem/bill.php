@@ -15,13 +15,6 @@ use yii\db\Connection;
 
 ?>
 
-<?php
- 
-
-
-
-?>
-
 <style>
     @media print {
         body * {
