@@ -45,6 +45,32 @@ $this->params['breadcrumbs'][] = $this->title;
                  
                 [
                     'class' => 'yii\grid\ActionColumn',
+                    'header' => 'Make payment',
+                    
+                    // 'headerOptions' => ['style' => 'color:#337ab7'],
+                    'template' => "{makepayment}",
+                    'buttons' => [
+                    
+                    'makepayment' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-briefcase"></span>', $url, [
+                            'title' => Yii::t('app', 'Make Payment'),
+                             
+                        ]);
+                    },
+     
+                    ],
+                    'urlCreator' => function ($action, $model, $key, $index) {
+
+                    if ($action === 'makepayment') {
+                        $url ='index.php?r=hospital/updateform&'.Yii::$app->request->get("id")."id=".$model->id;
+                        return $url;
+                    }
+                     
+                    }
+                     
+                ],
+                [
+                    'class' => 'yii\grid\ActionColumn',
                     'header' => 'print bill',
                     
                     // 'headerOptions' => ['style' => 'color:#337ab7'],
@@ -68,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                      
                     }
                      
-                ],  
+                ],   
         ],
     ]); ?>
 

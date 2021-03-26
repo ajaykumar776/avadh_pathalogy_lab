@@ -81,7 +81,14 @@ class BillitemController extends Controller
             return $this->render('bill', ['billitems'=>$billitems],$hospital_id);
         }else
         {
-            echo Yii::$app->Common->get_Alert();
+          $bill = HospitalBill::find()->where(['patient_id' => $id ])->andWhere(['=','remaining_amount',0])->one();
+
+          $hospital_id= $bill->id;
+                 
+            $billitems = BillItem::find()->where(['hospital_bill_id' => $hospital_id ])->all();
+     
+     
+          return $this->render('bill', ['billitems'=>$billitems],$hospital_id);
         }
         
     }

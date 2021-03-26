@@ -36,9 +36,16 @@ class HospitalController extends Controller
     public function actionIndex()
     {
         $searchModel = new HospitalBillSearch();
+        $dataProvider = $searchModel->search1(Yii::$app->request->queryParams);
+
+        return $this->render('index', [ 'searchModel' => $searchModel,'dataProvider' => $dataProvider,]);
+    }
+    public function actionIndex1()
+    {
+        $searchModel = new HospitalBillSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('index1', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -95,6 +102,27 @@ class HospitalController extends Controller
         }
 
         return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+    public function actionUpdateform($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post())){
+            $datas = HospitalBill::find()->where(['id' => $id ])->one();
+            $datas->discount = $model->discount;
+            $datas->remaining_amount -= $datas->discount;
+            $datas->final_amount -= $datas->discount;
+
+
+            $model->save();
+            
+
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('updateform', [
             'model' => $model,
         ]);
     }
