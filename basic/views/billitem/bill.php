@@ -60,6 +60,7 @@ use yii\db\Connection;
              <?php $total = HospitalBill::find()->where(['id'=> $billitem->hospital_bill_id])->one();?>
             <h2>Total Amount :<span class="text-align:left"><?php  echo $total->total_charges;?></span><h2>
             <h4>Discount :<span class="text-align:left"><?php  echo $total->discount;?></span><h4>
+            <h4>Paid Amount :<span class="text-align:left"><?php  echo $total->paid_amount;?></span><h4>
             <h4>Remaining Amount :<span class="text-align:left"><?php  echo $total->remaining_amount;?></span><h4> 
             
         </div>

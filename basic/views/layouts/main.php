@@ -78,13 +78,11 @@ AppAsset::register($this);
             $menuItems[] = ['label' => 'Category','url' => ['/category/index']];
             $menuItems[] = ['label' => 'SubCategory','url' => ['/scategory/index']];
             $menuItems[] = [
-                'label' => 'Tests',
+                'label' => 'Bills',
                 'items' => [
-                    ['label' => 'Manage Test', 'url' => ['/test/index']],
-                    ['label' => 'Manage Test parameter', 'url' => ['/test-parameter/index']],
-                    ['label' => 'Manage Test parameter Map', 'url' => ['/test-parameter-map/index']],
-                    ['label' => 'Manage Test Kit Map', 'url' => ['/test-kit-map/index']],
-                    ['label' => 'Manage Units', 'url' => ['/unit/index']],
+                    ['label' => 'Paid Bill', 'url' => ['/hospital/index']],
+                    ['label' => 'Unpaid Bill ', 'url' => ['/hospital/index1']],
+                    
                 ]
             ];
             $menuItems[] = [

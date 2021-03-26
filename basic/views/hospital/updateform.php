@@ -19,11 +19,17 @@ use app\models\Receipt ;
 
     <?= $form->field($model, 'paid_amount')->textInput(['disabled' => 'disabled']) ?>
 
-    <?= $form->field($model, 'remaining_amount')->textInput(['disabled' => 'disabled']) ?>
+    <?php echo $form->field($model, 'payment_mode')->dropDownList(['UPI-payment' => 'UPI-payment', 'By-Cash' => 'By-Cash', 'paytm' => 'Paytm'],['prompt'=>'Select Payment-mode']);?>
+
+    <?= $form->field($model, 'transaction_id')->textInput() ?>
 
     <?= $form->field($model, 'discount')->textInput()?>
 
-    <?= $form->field($model, 'final_amount')->textInput() ?>
+    <!-- <?= $form->field($model, 'remaining_amount')->textInput() ?>
+
+    <?= $form->field($model, 'final_amount')->textInput() ?> -->
+
+
 
    
 
@@ -34,3 +40,4 @@ use app\models\Receipt ;
     <?php ActiveForm::end(); ?>
 
 </div>
+

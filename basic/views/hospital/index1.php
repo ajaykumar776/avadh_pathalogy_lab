@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\HospitalBillSearch;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\HospitalBillSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Hospital Bills';
+$this->title = 'Unpaid Bills';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hospital-bill-index">
@@ -41,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn',
                 'header'=>'Actions',
-                'template' => "{view} {update}{delete}"],
+                'template' => "{view}"],
                  
                 [
                     'class' => 'yii\grid\ActionColumn',

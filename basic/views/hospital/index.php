@@ -2,12 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Patient;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\HospitalBillSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Hospital Bills';
+$this->title = 'Paid Hospital Bills';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hospital-bill-index">
@@ -28,6 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'patient_id',
+            [
+                'label' => 'Patient Names',
+                'value' => function ($data) {
+                    $m = Patient::find()->where(["patient_id" => $data->patient_id])->one();
+                    return $m->name;
+                },
+            ],
             'total_charges',
             'paid_amount',
             'remaining_amount',
@@ -41,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn',
                 'header'=>'Actions',
-                'template' => "{view} {update}{delete}"],
+                'template' => "{view}{delete}"],
                  
                 [
                     'class' => 'yii\grid\ActionColumn',

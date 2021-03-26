@@ -25,6 +25,10 @@ class HospitalBill extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $payment_mode ;
+    public $transaction_id ;
+
+
     public static function tableName()
     {
         return 'hospital_bill';
@@ -39,7 +43,7 @@ class HospitalBill extends \yii\db\ActiveRecord
             [['patient_id', 'total_charges', 'paid_amount', 'remaining_amount', 'discount', 'final_amount', 'created_datetime', 'updated_datetime', 'created_by', 'updated_by', 'is_deleted'], 'required'],
             [['patient_id', 'total_charges', 'paid_amount', 'remaining_amount', 'discount', 'final_amount'], 'integer'],
             [['created_datetime', 'updated_datetime'], 'safe'],
-            [['created_by', 'updated_by', 'is_deleted'], 'string', 'max' => 100],
+            [['created_by', 'updated_by', 'is_deleted','payment_mode','transaction_id'], 'string', 'max' => 100],
         ];
     }
 

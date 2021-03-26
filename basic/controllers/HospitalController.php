@@ -8,6 +8,7 @@ use app\models\HospitalBillSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Connection;
 
 /**
  * HospitalController implements the CRUD actions for HospitalBill model.
@@ -97,7 +98,9 @@ class HospitalController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -108,12 +111,46 @@ class HospitalController extends Controller
     public function actionUpdateform($id)
     {
         $model = $this->findModel($id);
+        $connection = \Yii::$app->db;
+        $model->created_datetime = date('Y-m-d H:i:s');
+        $model->updated_datetime = date('Y-m-d H:i:s');
+        $up= $model->updated_by = Yii::$app->user->identity->username;
+        $cp=$model->created_by = Yii::$app->user->identity->username;
 
         if ($model->load(Yii::$app->request->post())){
-            $datas = HospitalBill::find()->where(['id' => $id ])->one();
-            $datas->discount = $model->discount;
-            $datas->remaining_amount -= $datas->discount;
-            $datas->final_amount -= $datas->discount;
+
+            $model1 =  new  HospitalBill();
+            
+            $data = HospitalBill::find()->where(['id' => $id ])->one();
+            if($data){
+                $bill_id= $model->id;
+                $t_id = $model->transaction_id;
+                $payment_id = $model->payment_mode;
+                $model->final_amount = $model->total_charges - $model->discount;
+                $model->paid_amount =  $model->final_amount;
+
+                $connection->createCommand()->insert('receipt',
+                [
+                    'bill_id' => $id,
+                    'amount' =>  $model->paid_amount,
+                    'payment_mode' =>  $payment_id,
+                    'transaction_id' => $t_id ,
+                    'created_datetime' => date('Y-m-d H:i:s'),
+                    'updated_datetime' => date('Y-m-d H:i:s'),
+                    'updated_by' => $up,
+                    'created_by' => $cp,
+                    'is_deleted' => 0,
+                ])
+              
+                ->execute();
+                echo $model->remaining_amount = 0;echo "<br>";
+                $model->final_amount = $model->total_charges - $model->discount;
+                $model->paid_amount =  $model->final_amount;
+
+                $data->save();
+
+              
+            }
 
 
             $model->save();
