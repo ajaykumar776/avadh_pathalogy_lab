@@ -78,7 +78,7 @@ class BillitemController extends Controller
             $billitems = BillItem::find()->where(['hospital_bill_id' => $hospital_id ])->all();
 
 
-            return $this->render('bill', ['billitems'=>$billitems],$hospital_id);
+            return $this->render('bill', ['billitems'=>$billitems],$hospital_id,$id);
         }
 
         elseif($bill = HospitalBill::find()->where(['patient_id' => $id ])->andWhere(['=','remaining_amount',0])->one()){

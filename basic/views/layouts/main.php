@@ -82,6 +82,7 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Paid Bill', 'url' => ['/hospital/index']],
                     ['label' => 'Unpaid Bill ', 'url' => ['/hospital/index1']],
+                    ['label' => 'Bill Receipt ', 'url' => ['/receipt/index']],
                     
                 ]
             ];

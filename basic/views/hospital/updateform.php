@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Receipt ;
-
+use \yii\web\View;
 /* @var $this yii\web\View */
 /* @var $model app\models\HospitalBill */
 /* @var $form yii\widgets\ActiveForm */
@@ -25,9 +25,9 @@ use app\models\Receipt ;
 
     <?= $form->field($model, 'discount')->textInput()?>
 
-    <!-- <?= $form->field($model, 'remaining_amount')->textInput() ?>
+    <?= $form->field($model, 'remaining_amount')->textInput(['disabled' => 'disabled']) ?>
 
-    <?= $form->field($model, 'final_amount')->textInput() ?> -->
+    <?= $form->field($model, 'final_amount')->textInput(['disabled' => 'disabled']) ?>
 
 
 
@@ -41,3 +41,40 @@ use app\models\Receipt ;
 
 </div>
 
+<?php
+
+
+$script = <<< JS
+$(document).ready(function(){
+
+    function update_remaining_amount(selector, discount){
+        var parent = $(selector).closest('div');
+        var old_remaining_amount = +(parent.next().children('#hospitalbill-remaining_amount').val());
+        var new_remaining_amount = +(old_remaining_amount-discount);
+        parent.next().children('#hospitalbill-remaining_amount').val(new_remaining_amount);
+
+    }
+
+    function update_final_amount(selector, discount){
+        var parent = $(selector).closest('div');
+        var old_final_amount = +(parent.next().next().children('#hospitalbill-final_amount').val());
+        var new_final_amount = +(old_final_amount-discount);
+        parent.next().next().children('#hospitalbill-final_amount').val(new_final_amount);
+
+    }
+    
+    $('#hospitalbill-discount').change(function(){
+       var discount = $(this).val();
+
+        update_remaining_amount(this,discount);
+        update_final_amount(this,discount);
+    });
+    
+
+    
+
+    
+}); 
+JS;
+$this->registerJs($script, View::POS_END);
+?>

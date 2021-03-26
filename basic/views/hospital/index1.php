@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Patient;
 use app\models\HospitalBillSearch;
 
 /* @var $this yii\web\View */
@@ -27,8 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'patient_id',
+            // 'id',
+            // 'patient_id',
+            [
+                'label' => 'Patient Names',
+                'value' => function ($data) {
+                    $m = Patient::find()->where(["patient_id" => $data->patient_id])->one();
+                    return $m->name;
+                },
+            ],
             'total_charges',
             'paid_amount',
             'remaining_amount',

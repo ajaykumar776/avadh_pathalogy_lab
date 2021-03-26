@@ -27,8 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'patient_id',
+            // 'id',
+            // 'patient_id',
             [
                 'label' => 'Patient Names',
                 'value' => function ($data) {
